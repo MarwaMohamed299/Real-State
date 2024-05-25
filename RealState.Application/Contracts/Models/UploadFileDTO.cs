@@ -1,4 +1,5 @@
-﻿using RealState.Domain.Entities;
+﻿using Microsoft.AspNetCore.Http;
+using RealState.Domain.Entities;
 using RealState.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,8 @@ namespace RealState.Application.Contracts.Models
 {
     public class UploadFileDTO
     {
-        public string Name { get; set; } = string.Empty;
-        public string Url { get; set; } = string.Empty;
-        public FileType FileType { get; set; }
+        public IFormFile File { get; set; }
+        public int RequestId { get; set; }
 
-        //public int RequestId { get; set; }
     }
 }

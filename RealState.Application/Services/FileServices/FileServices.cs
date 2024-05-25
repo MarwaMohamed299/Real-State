@@ -18,7 +18,7 @@ namespace RealState.Infrastructure.Services.FileServices
             _unitOfWork = unitOfWork;
         }
 
-        public void UploadFile(UploadFileDTO file)
+        public void UploadFile(SaveFileDto file)
         {
 
             var uploadFile = new UploadFile
@@ -27,7 +27,7 @@ namespace RealState.Infrastructure.Services.FileServices
   
                 Name = file.Name,
                 FileType = file.FileType,
-                //RequestId = file.RequestId,
+                RequestId = file.RequestId,
                 Url = file.Url
 
             };

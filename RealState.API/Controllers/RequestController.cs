@@ -122,12 +122,12 @@ namespace RealState.API.Controllers
             var url = $"{Request.Scheme}://{Request.Host}/UploadedFiles/{fileType}/{generatedFileName}";
             #endregion
 
-            var newFile = new UploadFileDTO
-            {
-                Name = generatedFileName,
-                Url = url,
-                FileType = fileType
-            };
+            //var newFile = new UploadFileDTO
+            //{
+            //    Name = generatedFileName,
+            //    Url = url,
+            //    FileType = fileType
+            //};
 
 
             _requestService.AddRequest(addRequestDto);

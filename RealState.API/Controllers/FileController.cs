@@ -27,13 +27,13 @@ namespace RealState.API.Controllers
 
         [HttpPost]
         [Route("UploadFile")]
-        public ActionResult<UploadFileDTO> UploadFile( [FromForm] IFormFile file, [FromForm] FileType fileType, [FromForm] int RequestId )
+        public ActionResult<string> UploadFile( [FromForm] UploadFileDTO file )
         {
 
             
             #region Extention Checking
 
-            var extension = Path.GetExtension(file.FileName);
+            var extension = Path.GetExtension(file.File.FileName);
 
             //Change in appsettings.json
             var extensionList = _configuration.GetSection("AllowedFileExtenstions").Get<string[]>();
@@ -48,7 +48,7 @@ namespace RealState.API.Controllers
 
             #region Length Checking
 
-            bool isSizeAllowed = file.Length is > 0 and < 5_000_000; //File Size (Minimum: >0 and Max: 5MB)
+            bool isSizeAllowed = file.File.Length is > 0 and < 5_000_000; //File Size (Minimum: >0 and Max: 5MB)
 
             if (!isSizeAllowed)
             {
@@ -58,25 +58,25 @@ namespace RealState.API.Controllers
 
             #region Storing File
             var generatedFileName = $"{Guid.NewGuid()}{extension}";
-            var savedFilePath = Path.Combine(Environment.CurrentDirectory, "UploadedFiles", fileType.ToString(), generatedFileName);
+            var savedFilePath = Path.Combine(Environment.CurrentDirectory, "UploadedFiles", extension, generatedFileName);
             Directory.CreateDirectory(Path.GetDirectoryName(savedFilePath)!); // Ensure the directory exists
 
             using (var stream = new FileStream(savedFilePath, FileMode.Create))
             {
-                file.CopyTo(stream);
+                file.File.CopyTo(stream);
             }
             #endregion
 
             #region URL Generating
-            var url = $"{Request.Scheme}://{Request.Host}/UploadedFiles/{fileType}/{generatedFileName}";
+            var url = $"{Request.Scheme}://{Request.Host}/UploadedFiles/{extension}/{generatedFileName}";
             #endregion
 
-            var newFile = new UploadFileDTO
+            var newFile = new SaveFileDto
             {
                 Name = generatedFileName,
-                //RequestId = RequestId,
+                RequestId = file.RequestId,
                 Url = url,
-                FileType = fileType
+                FileType = FileType.Contract
             };
 
             _fileService.UploadFile(newFile);

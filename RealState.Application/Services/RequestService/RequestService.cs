@@ -213,7 +213,6 @@ namespace RealState.Infrastructure.Services.RequestService
             await _unitOfWork.RequestRepo.AddAsync(newRequest);
             await _unitOfWork.SaveChangesAsync();
 
-
         }
     }
 }
