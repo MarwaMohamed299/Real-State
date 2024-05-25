@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RealState.Application.Contracts.Abstractions
 {
-    public interface IGenericRepo<T> where T : class
+    public interface GenericRepo<T> where T : class
     {
         Task<IReadOnlyList<T>> GetAllAsync();
         Task<T?> GetByIdAsync(int id);

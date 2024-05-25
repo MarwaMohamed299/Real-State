@@ -9,13 +9,14 @@ using RealState.Application.Contracts.Abstractions.Services.RequestService;
 using RealState.Application.Contracts.Abstractions.UnitOfWork;
 using RealState.Application.Contracts.Abstractions.User;
 using RealState.Domain.Entities;
+using RealState.Infrastructure.Data;
 using RealState.Infrastructure.Data.Context;
 using RealState.Infrastructure.Data.Repositories;
 using RealState.Infrastructure.Data.UnitOfWork;
+using RealState.Infrastructure.Identity.UserService;
 using RealState.Infrastructure.Services.CalculateFeesService;
 using RealState.Infrastructure.Services.FileServices;
 using RealState.Infrastructure.Services.RequestService;
-using RealState.Infrastructure.Services.UserService;
 
 
 namespace RealState.Infrastructure
@@ -41,24 +42,14 @@ namespace RealState.Infrastructure
 
             services.AddScoped<IRequestRepo, RequestRepo>();
             services.AddScoped<IFileRepo, FileRepo>();
+            services.AddScoped<IGovernorateRepo, GovernorateRepo>();
+            services.AddScoped<ICityRepo, CityRepo>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            #endregion
-
-            #region FileServices
-            services.AddScoped<IFileService, FileServices>();
 
             #endregion
 
-            #region Request Service
-
-            services.AddScoped<IRequestService, RequestService>();
-
-            #endregion
-            #region Fees Service
-            services.AddScoped<IFeesService, FeesService>();
-
-            #endregion
+           
 
             return services;
         }

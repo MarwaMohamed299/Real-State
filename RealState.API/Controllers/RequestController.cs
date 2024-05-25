@@ -28,28 +28,6 @@ namespace RealState.API.Controllers
             _configuration = configuration;
             _fileService = fileService;
         }
-
-        [HttpGet]
-        [Route("Get-Governorates")]
-        public async Task<ActionResult<IEnumerable<GovernorateReadDto>>> GetAllGovernoratesAsync()
-        {
-            var result = await _requestService.GetGovernoratesAsync();
-            return Ok(result);
-        }
-        [HttpGet]
-        [Route("Get-Cities-By-GovernorateId")]
-        public async Task<ActionResult<IEnumerable<CityReadDto>>> GetCitiesByGovernorateIdAsync(int governorateId)
-        {
-            var result = await _requestService.GetCitiesByGovernorateIdAsync(governorateId);
-            return Ok(result);
-        }
-        [HttpGet]
-        [Route("Get-Governorate-By-City-Id")]
-        public async Task<ActionResult<IEnumerable<CityReadDto>>> GetGovrnorateByCityId(int cityId)
-        {
-            var result = await _requestService.GetCitiesWithGovernorates(cityId);
-            return Ok(result);
-        }
         [HttpGet]
         [Route("Get-UnitTypes")]
         public async Task<ActionResult<IEnumerable<UnitTypeReadDto>>> GetUnitTypesAsync()

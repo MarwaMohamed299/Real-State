@@ -11,6 +11,9 @@ namespace RealState.Application.Contracts.Abstractions.UnitOfWork
     {
         public IRequestRepo RequestRepo { get; }
         public IFileRepo FileRepo { get; }
-        Task<int> SaveChangesAsync();
+        public IGovernorateRepo GovernorateReo { get; }
+        public ICityRepo CityRepo { get; }
+
+        Task SaveChangesAsync();
     }
 }
