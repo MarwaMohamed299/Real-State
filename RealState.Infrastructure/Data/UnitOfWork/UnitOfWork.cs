@@ -13,20 +13,27 @@ namespace RealState.Infrastructure.Data.UnitOfWork
     {
         public IRequestRepo RequestRepo{ get; }
         public IFileRepo FileRepo { get; }
+        public IGovernorateRepo GovernorateReo { get; }
+
+        public ICityRepo CityRepo { get; }
 
         private readonly RealStateContext _dbContext;
 
         public UnitOfWork(RealStateContext dbcontext,
             IRequestRepo requestRepository,
-            IFileRepo fileRepo)
+            IFileRepo fileRepo,
+            IGovernorateRepo governorateReo,
+            ICityRepo cityRepo)
         {
             _dbContext = dbcontext;
             RequestRepo = requestRepository;
             FileRepo = fileRepo;
+            GovernorateReo = governorateReo;
+            CityRepo = cityRepo;
         }
-        public async Task<int> SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            return await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

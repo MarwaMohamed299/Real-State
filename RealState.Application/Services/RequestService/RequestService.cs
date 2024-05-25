@@ -1,7 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.EntityFrameworkCore;
-using RealState.Application.Contracts.Abstractions.Services.CalculateFees;
+﻿using RealState.Application.Contracts.Abstractions.Services.CalculateFees;
 using RealState.Application.Contracts.Abstractions.Services.RequestService;
 using RealState.Application.Contracts.Abstractions.UnitOfWork;
 using RealState.Application.Contracts.Models;
@@ -10,7 +7,6 @@ using RealState.Application.Contracts.Models.Buildings;
 using RealState.Application.Contracts.Models.Cities;
 using RealState.Application.Contracts.Models.Governorates;
 using RealState.Domain.Entities;
-using RealState.Infrastructure.Data.UnitOfWork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,25 +28,7 @@ namespace RealState.Infrastructure.Services.RequestService
             _FeesService = FeesService;
         }
 
-        public async Task<IEnumerable<CityReadDto>> GetCitiesByGovernorateIdAsync(int GovernorateId)
-        {
-            IEnumerable<City> cityReadDtos = await _unitOfWork.RequestRepo.GetCitiesByGovernorateIdAsync(GovernorateId);
-            return cityReadDtos.Select(c => new CityReadDto
-            {
-                Id = c.Id,
-                Name = c.Name
-            });
-
-        }
-        public async Task<IEnumerable<GovernorateReadDto>> GetGovernoratesAsync()
-        {
-            IEnumerable<Governorate> governorateReadDtos = await _unitOfWork.RequestRepo.GetGovernoratesAsync();
-            return governorateReadDtos.Select(c => new GovernorateReadDto
-            {
-                Id = c.Id,
-                Name = c.Name
-            });
-        }
+        
         public async Task<IEnumerable<UnitTypeReadDto>> GetUnittypesAsync()
         {
             var units = await _unitOfWork.RequestRepo.GetUnitTypesAsync();
@@ -86,18 +64,7 @@ namespace RealState.Infrastructure.Services.RequestService
             throw new NotImplementedException();
         }
 
-        public async Task<CityWithGovernorateReadDto> GetCitiesWithGovernorates(int id)
-        {
-            var city = await _unitOfWork.RequestRepo.GetCityWithGovernorateAsync(id);
-            var dto = new CityWithGovernorateReadDto
-            {
-                CityName = city.Name,
-                Id = city.Id,
-                GovernorateName = city.Governorate!.Name
-            };
-
-            return dto;
-        }
+        
 
 
 

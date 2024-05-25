@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RealState.Infrastructure.Data.Repositories.Generics
 {
-    public class GenericRepo<T> : IGenericRepo<T> where T : class
+    public class GenericRepo<T> : Application.Contracts.Abstractions.GenericRepo<T> where T : class
     {
         private readonly RealStateContext _dbContext;
         public GenericRepo(RealStateContext dbContext)

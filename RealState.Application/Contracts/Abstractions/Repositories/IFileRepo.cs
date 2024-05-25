@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RealState.Application.Contracts.Abstractions.Repositories
 {
-    public interface IFileRepo : IGenericRepo<UploadFile>
+    public interface IFileRepo : GenericRepo<UploadFile>
     {
 
         IEnumerable<UploadFile> GetRequestFiles(int RequestId);

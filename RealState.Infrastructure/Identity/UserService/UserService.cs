@@ -15,7 +15,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RealState.Infrastructure.Services.UserService
+namespace RealState.Infrastructure.Identity.UserService
 {
     public class UserService : IUserService
     {
